@@ -43,22 +43,28 @@
 
 #include "contiki-conf.h"
 #include "dev/leds.h"
+#include "avr/io.h"
 
 /*---------------------------------------------------------------------------*/
 void
 leds_arch_init(void)
 {
+  DDRB |= (1<<PB5);
 }
 /*---------------------------------------------------------------------------*/
 unsigned char
 leds_arch_get(void)
 {
-    return 0;
+    return ((PINB & (1<<PB5)) ? LEDS_GREEN : 0);
 }
 /*---------------------------------------------------------------------------*/
 void
 leds_arch_set(unsigned char leds)
 {
-
+  if(leds & LEDS_GREEN){
+    PORTB |= (1<<PB5);
+  } else {
+    PORTB &= ~(1<<PB5);
+  }
 }
 /*---------------------------------------------------------------------------*/

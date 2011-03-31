@@ -122,26 +122,26 @@ create(void)
   }
   params.dest_pid = mac_dst_pan_id;
 
-  /*
+    /*
    *  If the output address is NULL in the Rime buf, then it is broadcast
    *  on the 802.15.4 network.
    */
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+//  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     /* Broadcast requires short address mode. */
     params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
     params.dest_addr[0] = 0xFF;
     params.dest_addr[1] = 0xFF;
 
-  } else {
-    rimeaddr_copy((rimeaddr_t *)&params.dest_addr,
-                  packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+//  } else {
+//    rimeaddr_copy((rimeaddr_t *)&params.dest_addr,
+//                  packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
     /* Use short address mode if rimeaddr size is small */
-    if(sizeof(rimeaddr_t) == 2) {
-      params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
-    } else {
-      params.fcf.dest_addr_mode = FRAME802154_LONGADDRMODE;
-    }
-  }
+//    if(sizeof(rimeaddr_t) == 2) {
+//      params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
+//    } else {
+//      params.fcf.dest_addr_mode = FRAME802154_LONGADDRMODE;
+//    }
+//  }
 
   /* Set the source PAN ID to the global variable. */
   params.src_pid = mac_src_pan_id;
