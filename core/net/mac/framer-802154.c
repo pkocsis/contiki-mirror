@@ -122,7 +122,7 @@ create(void)
   }
   params.dest_pid = mac_dst_pan_id;
 
-/*
+  /*
    *  If the output address is NULL in the Rime buf, then it is broadcast
    *  on the 802.15.4 network.
    */
