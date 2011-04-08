@@ -30,7 +30,7 @@
  * This file is part of libmc1322x: see http://mc1322x.devl.org
  * for details. 
  *
- * $Id: default_lowlevel.c,v 1.2 2010/11/10 22:09:23 maralvira Exp $
+ *
  */
 
 #include <mc1322x.h>
@@ -50,6 +50,14 @@ void uart1_init(uint16_t inc, uint16_t mod, uint8_t samp) {
         /* UART must be disabled to set the baudrate */
 	*UART1_UCON = 0;
 	*UART1_UBRCNT = ( inc << 16 ) | mod; 
+
+	/* TX and CTS as outputs */
+	GPIO->PAD_DIR_SET.GPIO_14 = 1;
+	GPIO->PAD_DIR_SET.GPIO_16 = 1;
+
+	/* RX and RTS as inputs */
+	GPIO->PAD_DIR_RESET.GPIO_15 = 1;
+	GPIO->PAD_DIR_RESET.GPIO_17 = 1;
 
 	/* see Section 11.5.1.2 Alternate Modes */
 	/* you must enable the peripheral first BEFORE setting the function in GPIO_FUNC_SEL */

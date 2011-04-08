@@ -41,7 +41,11 @@
 #if defined(__AVR__)
 #include <avr/io.h>
 #elif defined(__MSP430__)
+#ifdef __IAR_SYSTEMS_ICC__
+#include <io430.h>
+#else
 #include <io.h>
+#endif
 #endif
 
 #include "dev/leds.h"
@@ -139,7 +143,7 @@ static int cc2420_send(const void *data, unsigned short len);
 static int cc2420_receiving_packet(void);
 static int pending_packet(void);
 static int cc2420_cca(void);
-static int detected_energy(void);
+/*static int detected_energy(void);*/
 
 signed char cc2420_last_rssi;
 uint8_t cc2420_last_correlation;
